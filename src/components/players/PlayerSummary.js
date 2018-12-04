@@ -1,22 +1,18 @@
 import React from 'react';
 
 const PlayerSummary = ({player}) => {
+	const randomPoint = () => {
+		return Math.round(Math.random()*40)
+	}
+	let goals = randomPoint(),
+	assists = randomPoint(),
+	points = goals + assists;
 	return (
 		<section className="card player-summary">
-			<div className="card-content white-text">
-				<div className="inline-block stat">
-					<div className="red">Name:</div>
-					<div className="black yellow-text">{player.name}</div>
-				</div>
-				<div className="inline-block stat">
-					<div className="red">Position:</div>
-					<div className="black blue-text lighten-2">{player.position}</div>
-				</div>
-				<div className="inline-block stat">
-					<div className="red">Points:</div>
-					<div className="black blue-text lighten-2">{Math.round(Math.random()*40)}</div>
-				</div>
-			</div>
+			<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{player.firstName + ' ' + player.lastName}</div>
+			<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{player.number}</div>
+			<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{player.position}</div>
+			<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{player.shoots}</div>
 		</section>
 	)
 }
