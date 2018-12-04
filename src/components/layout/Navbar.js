@@ -5,10 +5,10 @@ import SignedOutLinks from './SignedOutLinks';
 import { connect } from 'react-redux';
 
 const Navbar = (props) => {
-	const links = props ? <SignedInLinks /> : <SignedOutLinks />;
+	const links = props.auth ? <SignedInLinks /> : <SignedOutLinks />;
 	return (
-		<nav className="nav-wrapper grey darken-3">
-			<Link to='/' className='logo'>Rostered</Link>
+		<nav className="center red darken-4">
+			<Link to='/' className='container'>Rostered</Link>
 			{ links }
 		</nav>
 	)

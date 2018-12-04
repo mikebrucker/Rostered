@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import AddPlayer from '../players/AddPlayer';
+import PlayerList from '../players/PlayerList';
 
 class Dashboard extends Component {
 	render() {
 		
 		return (
 			<div className="dashboard">
-
+				<AddPlayer />
+				<PlayerList />
 			</div> 
 		)
 	}
