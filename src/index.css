@@ -6,13 +6,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #212121;
 }
 
 nav {
   font-size: 40px;
 }
 
-select:focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),
@@ -21,9 +21,23 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-color: crimson;
   box-shadow: none;
 }
+select:focus:not([readonly]) {
+  border: 2px solid crimson;
+  box-shadow: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+select:focus-within + label,
+input[type=text]:focus + label,
+input[type=email]:focus + label,
+input[type=password]:focus + label,
+input[type=number]:focus + label {
+  color: red !important;
+}
 
 .stat {
-  border: 2px solid black;
+  border: 2px solid silver;
   border-left: none;
   display: inline-block;
   width: 25%;
@@ -31,13 +45,32 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 .player-summary .stat:first-of-type {
-  border: 2px solid black;
+  border: 2px solid silver;
 }
 
 button {
   margin: 10px;
 }
 
+form {
+  padding: 20px;
+  margin: 20px auto;
+}
+
 .underline {
   text-decoration: underline;
+}
+
+button.yellow {
+  color: black;
+}
+
+.select-label {
+  position: relative;
+  bottom: 60px;
+}
+
+select {
+  position: relative;
+  top: 20px;
 }

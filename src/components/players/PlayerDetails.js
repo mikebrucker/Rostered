@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import PlayerStatColumns from '../layout/PlayerStatColumns';
-import { deletePlayer } from '../store/actions/playerActions';
+import { deletePlayer } from '../../store/actions/playerActions';
+import { Redirect } from 'react-router-dom';
 
 const PlayerDetails = (props) => {
-	const { player, playerId } = props;
+	
+	const { player, playerId, auth } = props;
+	if (!auth.uid) return <Redirect to='/signin' />
 
 	const deleteThisPlayer = () => {
 		props.deletePlayer(playerId);
@@ -46,7 +49,8 @@ const mapStateToProps = (state, ownProps) => {
 	const player = players ? players[id] : null;
 	return {
 		player: player,
-		playerId: id
+		playerId: id,
+		auth: state.firebase.auth,
 	}
 }
 
