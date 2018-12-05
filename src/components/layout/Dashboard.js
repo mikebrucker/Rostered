@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AddPlayer from '../players/AddPlayer';
 import PlayerList from '../players/PlayerList';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -10,7 +9,6 @@ class Dashboard extends Component {
 		const { players } = this.props;
 		return (
 			<div className="dashboard">
-				<AddPlayer />
 				<PlayerList players={players} />
 			</div> 
 		)

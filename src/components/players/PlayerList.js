@@ -2,7 +2,6 @@ import React from 'react';
 import PlayerSummary from './PlayerSummary';
 import { Link } from 'react-router-dom';
 import PlayerStatColumns from '../layout/PlayerStatColumns';
-import { connect } from 'react-redux';
 
 const PlayerList = ({players}) => {
 	return (

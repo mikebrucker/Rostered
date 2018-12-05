@@ -12,3 +12,21 @@ export const addPlayer = (player) => {
 		})
 	}
 };
+
+export const deletePlayer = (player) => {
+	return (dispatch, getState, { getFirebase, getFirestore }) => {
+		const firestore = getFirestore();
+		firestore.collection('players').doc(player).delete()
+			.then(() => {
+				dispatch({ type: 'DELETE_PLAYER', player })
+			}).catch((err) => {
+				dispatch({ type: 'DELETE_PLAYER_ERROR', err })
+			})
+	}
+}
+
+export const editPlayer = (player) => {
+	return {
+		
+	}
+}

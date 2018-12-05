@@ -26,10 +26,18 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border: 2px solid black;
   border-left: none;
   display: inline-block;
-  width: 16.66%;
+  width: 25%;
   padding: 10px;
 }
 
 .player-summary .stat:first-of-type {
   border: 2px solid black;
+}
+
+button {
+  margin: 10px;
+}
+
+.underline {
+  text-decoration: underline;
 }

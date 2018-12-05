@@ -5,6 +5,8 @@ import Dashboard from './components/layout/Dashboard';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import PlayerDetails from './components/players/PlayerDetails';
+import AddPlayer from './components/players/AddPlayer';
+import EditPlayer from './components/players/EditPlayer';
 
 class App extends Component {
   render() {
@@ -16,7 +18,9 @@ class App extends Component {
             <Route exact path='/' component={Dashboard} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
-            <Route path='/player/:id' component={PlayerDetails} />
+            <Route path='/addplayer' component={AddPlayer} />
+            <Route exact path='/player/:id' component={PlayerDetails} />
+            <Route exact path='/player/edit/:id' component={EditPlayer} />
           </Switch>
         </main>
       </BrowserRouter>

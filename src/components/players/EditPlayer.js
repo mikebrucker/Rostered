@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPlayer } from '../store/actions/playerActions';
+import { editPlayer } from '../store/actions/playerActions';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 // import { Redirect } from 'react-router-dom';
 
-class AddPlayer extends Component {
+class EditPlayer extends Component {
 	state = {
-		firstName: null,
-		lastName: null,
-		number: null,
-		position: 'C',
-		shoots: 'Right',
+		...this.props
 	}
-
 	handleChange = e => {
 		this.setState({
 			[e.target.id]: e.target.value
@@ -19,11 +16,12 @@ class AddPlayer extends Component {
 	}
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.addPlayer(this.state);
+		this.props.editPlayer(this.state);
 		this.props.history.push('/');
 	}
 
 	render() {
+		console.log(this.state)
 		return (
 			<div className='container add-player'>
 				<form onSubmit={this.handleSubmit}>
@@ -53,7 +51,7 @@ class AddPlayer extends Component {
 					</select>
 
 					<label htmlFor="shoots">Shoots</label>
-					<select className="input-field browser-default" id='shoots' onChange={this.handleChange}>
+					<select value='{player.shoots}' className="input-field browser-default" id='shoots' onChange={this.handleChange}>
 						<option defaultValue="Right">Right</option>
 						<option value="Left">Left</option>
 					</select>
@@ -67,10 +65,25 @@ class AddPlayer extends Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state, ownProps) => {
+	const id = ownProps.match.params.id;
+	const players = state.firestore.data.players;
+	const player = players ? players[id] : null;
+	// console.log(state, ownProps)
 	return {
-		addPlayer: (player) => dispatch(addPlayer(player))
+		player: player
 	}
 }
 
-export default connect(null, mapDispatchToProps)(AddPlayer);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		editPlayer: (player) => dispatch(editPlayer(player))
+	}
+}
+
+export default compose(
+	connect(mapStateToProps, mapDispatchToProps),
+	firestoreConnect([
+		{ collection: 'players' }
+	])
+)(EditPlayer);

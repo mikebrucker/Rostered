@@ -1,12 +1,6 @@
 import React from 'react';
 
 const PlayerSummary = ({player}) => {
-	const randomPoint = () => {
-		return Math.round(Math.random()*40)
-	}
-	let goals = randomPoint(),
-	assists = randomPoint(),
-	points = goals + assists;
 	return (
 		<section className="card player-summary">
 			<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{player.firstName + ' ' + player.lastName}</div>
