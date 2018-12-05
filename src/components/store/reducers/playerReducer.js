@@ -16,6 +16,12 @@ const playerReducer = (state = initState, action) => {
 		case 'DELETE_PLAYER_ERROR':
 			console.log('error deleting player', action.err)
 			return state;
+		case 'EDIT_PLAYER':
+			console.log('player edited', action.player)
+			return state;
+		case 'EDIT_PLAYER_ERROR':
+			console.log('error deleting player', action.err)
+			return state;
 		default:
 			return state;
 	}

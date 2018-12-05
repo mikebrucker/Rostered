@@ -7,7 +7,8 @@ import { compose } from 'redux';
 
 class EditPlayer extends Component {
 	state = {
-		...this.props
+		...this.props.player,
+		playerId: this.props.playerId
 	}
 	handleChange = e => {
 		this.setState({
@@ -19,9 +20,15 @@ class EditPlayer extends Component {
 		this.props.editPlayer(this.state);
 		this.props.history.push('/');
 	}
+	componentDidMount() {
+		document.getElementById('firstName').value = this.state.firstName
+		document.getElementById('lastName').value = this.state.lastName
+		document.getElementById('number').value = this.state.number
+		document.getElementById('position').value = this.state.position
+		document.getElementById('shoots').value = this.state.shoots
+	}
 
 	render() {
-		console.log(this.state)
 		return (
 			<div className='container add-player'>
 				<form onSubmit={this.handleSubmit}>
@@ -51,7 +58,7 @@ class EditPlayer extends Component {
 					</select>
 
 					<label htmlFor="shoots">Shoots</label>
-					<select value='{player.shoots}' className="input-field browser-default" id='shoots' onChange={this.handleChange}>
+					<select className="input-field browser-default" id='shoots' onChange={this.handleChange}>
 						<option defaultValue="Right">Right</option>
 						<option value="Left">Left</option>
 					</select>
@@ -69,15 +76,15 @@ const mapStateToProps = (state, ownProps) => {
 	const id = ownProps.match.params.id;
 	const players = state.firestore.data.players;
 	const player = players ? players[id] : null;
-	// console.log(state, ownProps)
 	return {
-		player: player
+		player: player,
+		playerId: id
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		editPlayer: (player) => dispatch(editPlayer(player))
+		editPlayer: (player, playerId) => dispatch(editPlayer(player, playerId))
 	}
 }
 

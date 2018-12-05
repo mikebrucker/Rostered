@@ -13,12 +13,12 @@ export const addPlayer = (player) => {
 	}
 };
 
-export const deletePlayer = (player) => {
+export const deletePlayer = (playerId) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
 		const firestore = getFirestore();
-		firestore.collection('players').doc(player).delete()
+		firestore.collection('players').doc(playerId).delete()
 			.then(() => {
-				dispatch({ type: 'DELETE_PLAYER', player })
+				dispatch({ type: 'DELETE_PLAYER', playerId })
 			}).catch((err) => {
 				dispatch({ type: 'DELETE_PLAYER_ERROR', err })
 			})
@@ -26,7 +26,20 @@ export const deletePlayer = (player) => {
 }
 
 export const editPlayer = (player) => {
-	return {
-		
+	return (dispatch, getState, { getFirebase, getFirestore }) => {
+		const firestore = getFirestore();
+		console.log(player)
+		firestore.collection('players').doc(player.playerId).set({
+			firstName: player.firstName,
+			lastName: player.lastName,
+			number: player.number,
+			position: player.position,
+			shoots: player.shoots,
+		})
+			.then(() => {
+				dispatch({ type: 'EDIT_PLAYER', player })
+			}).catch((err) => {
+				dispatch({ type: 'EDIT_PLAYER_ERROR', err })
+			})
 	}
 }
