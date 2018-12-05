@@ -62,7 +62,7 @@ class AddPlayer extends Component {
 					<label className="select-label" htmlFor="shoots">Shoots</label>
 
 					<div className="input-field">
-						<button>Submit</button>
+						<button className="btn green">Submit</button>
 					</div>
 				</form>
 			</div>
