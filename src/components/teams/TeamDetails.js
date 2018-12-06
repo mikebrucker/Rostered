@@ -26,14 +26,16 @@ const TeamDetails = (props) => {
 
 	if (team) {
 		return (
-			<section className="card center player-summary">
+			<section className="card center team-details">
 				<h2 className="underline">{team.teamName}</h2>
-				<div>
-					<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{team.teamName}</div>
-					<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{team.league}</div>
-					<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{team.arena}</div>
-					<PlayerList players={players} teamId={teamId} />
+				<div className="container section">
+					<div className="card">
+						<div className="blue-grey team-stat indigo-text text-darken-4 lighten-5">{team.teamName}</div>
+						<div className="blue-grey team-stat indigo-text text-darken-4 lighten-5">{team.league}</div>
+						<div className="blue-grey team-stat indigo-text text-darken-4 lighten-5">{team.arena}</div>
+					</div>
 				</div>
+				<PlayerList players={players} teamId={teamId} />
 				<button onClick={addPlayerToThisTeam} className="btn green accent-4">Add Player</button>
 				<button onClick={editThisTeam} className="btn amber accent-4">Edit Team</button>
 				<button onClick={deleteThisTeam} className="btn red accent-4">Delete Team</button>

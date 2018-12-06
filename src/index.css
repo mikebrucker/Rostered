@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -36,16 +40,23 @@ input[type=number]:focus + label {
   color: red !important;
 }
 
-.stat {
+.stat, .team-stat {
   border: 2px solid silver;
   border-left: none;
   display: inline-block;
-  width: 25%;
   padding: 10px;
+}
+.stat {
+  width: 25%;
+}
+
+.team-stat {
+  width: 33.333%;
 }
 
 .player-summary .stat:first-of-type,
-.team-list .stat:first-of-type {
+.team-details .team-stat:first-of-type,
+.team-list .team-stat:first-of-type {
   border: 2px solid silver;
 }
 

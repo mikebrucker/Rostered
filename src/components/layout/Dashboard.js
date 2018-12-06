@@ -8,12 +8,13 @@ import TeamList from '../teams/TeamList';
 class Dashboard extends Component {
 	render() {
 		const { auth, players, teams } = this.props;
+
 		if (!auth.uid) return <Redirect to='/signin' />
 
 		return (
-			<div className="dashboard section center">
-				<TeamList players={players} teams={teams} />
-			</div> 
+			<section className="dashboard section center">
+				<TeamList auth={auth} teams={teams} />
+			</section> 
 		)
 	}
 }
