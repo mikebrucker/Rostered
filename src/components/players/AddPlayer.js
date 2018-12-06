@@ -10,6 +10,7 @@ class AddPlayer extends Component {
 		number: null,
 		position: 'C',
 		shoots: 'Right',
+		teamId: this.props.teamId,
 	}
 
 	handleChange = e => {
@@ -20,7 +21,7 @@ class AddPlayer extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		this.props.addPlayer(this.state);
-		this.props.history.push('/');
+		this.props.history.push('/team/' + this.state.teamId);
 	}
 
 	render() {
@@ -70,9 +71,11 @@ class AddPlayer extends Component {
 	}
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+	const id = ownProps.match.params.id
 	return {
 		auth: state.firebase.auth,
+		teamId: id,
 	}
 }
 

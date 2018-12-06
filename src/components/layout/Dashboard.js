@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import PlayerList from '../players/PlayerList';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import TeamList from '../teams/TeamList';
 
 class Dashboard extends Component {
 	render() {
-		const { auth } = this.props;
+		const { auth, players, teams } = this.props;
 		if (!auth.uid) return <Redirect to='/signin' />
 
-		const { players } = this.props;
 		return (
-			<div className="dashboard">
-				<PlayerList players={players} />
+			<div className="dashboard section center">
+				<TeamList players={players} teams={teams} />
 			</div> 
 		)
 	}
@@ -22,6 +21,7 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
 	return {
 		players: state.firestore.ordered.players,
+		teams: state.firestore.ordered.teams,
 		auth: state.firebase.auth,
 	};
 }
@@ -29,6 +29,7 @@ const mapStateToProps = (state) => {
 export default compose(
 	connect(mapStateToProps),
 	firestoreConnect([
-		{ collection: 'players' }
+		{ collection: 'players'},
+		{ collection: 'teams'},
 	])
 )(Dashboard);

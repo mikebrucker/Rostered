@@ -7,7 +7,9 @@ import SignUp from './components/auth/SignUp';
 import PlayerDetails from './components/players/PlayerDetails';
 import AddPlayer from './components/players/AddPlayer';
 import EditPlayer from './components/players/EditPlayer';
+import TeamDetails from './components/teams/TeamDetails';
 import AddTeam from './components/teams/AddTeam';
+import EditTeam from './components/teams/EditTeam';
 
 class App extends Component {
   render() {
@@ -19,8 +21,10 @@ class App extends Component {
             <Route exact path='/' component={Dashboard} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
-            <Route path='/addplayer' component={AddPlayer} />
             <Route path='/addteam' component={AddTeam} />
+            <Route exact path='/team/:id' component={TeamDetails} />
+            <Route exact path='/team/addplayer/:id' component={AddPlayer} />
+            <Route exact path='/team/edit/:id' component={EditTeam} />
             <Route exact path='/player/:id' component={PlayerDetails} />
             <Route exact path='/player/edit/:id' component={EditPlayer} />
           </Switch>

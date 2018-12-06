@@ -5,7 +5,11 @@ import { Redirect } from 'react-router-dom';
 
 class AddTeam extends Component {
 	state = {
-
+		teamOwnerId: this.props.auth.uid,
+		teamName: null,
+		league: null,
+		arena: null,
+		sport: 'Hockey'
 	}
 
 	handleChange = e => {
@@ -37,8 +41,13 @@ class AddTeam extends Component {
 						<label htmlFor='league'>League:</label>
 					</div>
 
+					<div className="input-field">
+						<input placeholder='Arena' type='text' id='arena' onChange={this.handleChange} />
+						<label htmlFor='arena'>Arena:</label>
+					</div>
+
 					<select className="input-field browser-default" id='sport' onChange={this.handleChange}>
-						<option defaultValue="Right">Hockey</option>
+						<option defaultValue="Hockey">Hockey</option>
 					</select>
 					<label className="select-label" htmlFor="sport">Sport:</label>
 

@@ -44,7 +44,8 @@ input[type=number]:focus + label {
   padding: 10px;
 }
 
-.player-summary .stat:first-of-type {
+.player-summary .stat:first-of-type,
+.team-list .stat:first-of-type {
   border: 2px solid silver;
 }
 
