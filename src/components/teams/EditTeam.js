@@ -13,7 +13,6 @@ class EditTeam extends Component {
 	handleChange = e => {
 		this.setState({
 			[e.target.id]: e.target.value,
-			teamId: this.props.teamId
 		})
 	}
 	handleSubmit = e => {

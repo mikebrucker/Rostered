@@ -33,6 +33,7 @@ export const editTeam = (team) => {
 			teamName: team.teamName,
 			league: team.league,
 			arena: team.arena,
+			sport: team.sport,
 			teamOwnerId: team.teamOwnerId
 		})
 			.then(() => {
