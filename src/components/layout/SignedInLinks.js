@@ -7,9 +7,8 @@ const SignedInLinks = (props) => {
 	return (
 		<ul className="right">
 			<li><NavLink to='/'>My Teams</NavLink></li>
-			<li><NavLink to='/addteam'>New Team</NavLink></li>
 			<li><Link to='/signin' onClick={props.signOut}>Log Out</Link></li>
-			<li><NavLink to='profile'>{props.profile.firstName}</NavLink></li>
+			<li><NavLink to='/profile'>{props.profile.firstName}</NavLink></li>
 		</ul>
 	)
 }

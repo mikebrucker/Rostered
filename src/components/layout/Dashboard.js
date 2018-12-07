@@ -7,7 +7,7 @@ import TeamList from '../teams/TeamList';
 
 class Dashboard extends Component {
 	render() {
-		const { auth, players, teams } = this.props;
+		const { auth, teams } = this.props;
 
 		if (!auth.uid) return <Redirect to='/signin' />
 
@@ -21,7 +21,6 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		players: state.firestore.ordered.players,
 		teams: state.firestore.ordered.teams,
 		auth: state.firebase.auth,
 	};
@@ -30,7 +29,6 @@ const mapStateToProps = (state) => {
 export default compose(
 	connect(mapStateToProps),
 	firestoreConnect([
-		{ collection: 'players'},
 		{ collection: 'teams'},
 	])
 )(Dashboard);
