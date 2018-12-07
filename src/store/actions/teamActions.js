@@ -33,6 +33,7 @@ export const editTeam = (team) => {
 			teamName: team.teamName,
 			league: team.league,
 			arena: team.arena,
+			teamOwnerId: team.teamOwnerId
 		})
 			.then(() => {
 				dispatch({ type: 'EDIT_TEAM', team })

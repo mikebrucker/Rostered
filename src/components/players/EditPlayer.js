@@ -12,13 +12,13 @@ class EditPlayer extends Component {
 	}
 	handleChange = e => {
 		this.setState({
-			[e.target.id]: e.target.value
+			[e.target.id]: e.target.value,
 		})
 	}
 	handleSubmit = e => {
 		e.preventDefault();
 		this.props.editPlayer(this.state);
-		this.props.history.push('/');
+		this.props.history.push('/team/' + this.state.teamId);
 	}
 	componentDidMount() {
 		if (this.state.firstName) {
@@ -27,7 +27,6 @@ class EditPlayer extends Component {
 			document.getElementById('number').value = this.state.number;
 			document.getElementById('position').value = this.state.position;
 			document.getElementById('shoots').value = this.state.shoots;
-			console.log(this.state)
 		}
 	}
 	
@@ -71,7 +70,7 @@ class EditPlayer extends Component {
 						</select>
 	
 						<div className="input-field">
-							<button>Submit</button>
+							<button className="btn green">Submit</button>
 						</div>
 					</form>
 				</div>

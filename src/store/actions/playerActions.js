@@ -35,6 +35,7 @@ export const editPlayer = (player) => {
 			number: player.number,
 			position: player.position,
 			shoots: player.shoots,
+			teamId: player.teamId
 		})
 			.then(() => {
 				dispatch({ type: 'EDIT_PLAYER', player })
