@@ -20,11 +20,28 @@ class EditTeam extends Component {
 		this.props.editTeam(this.state);
 		this.props.history.push('/');
 	}
+	componentDidMount() {
+		if (this.state.teamName) {
+			localStorage.setItem('teamName', this.state.teamName);
+			localStorage.setItem('league', this.state.league);
+			localStorage.setItem('arena', this.state.arena);
+		} else {
+			let teamName = localStorage.getItem('teamName'),
+			league = localStorage.getItem('league'),
+			arena = localStorage.getItem('arena');
+			this.setState({
+				teamName,
+				league,
+				arena,
+				teamId: this.props.teamId
+			})
+		}
+	}
 	
 	render() {
 		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to='/signin' />
-		if (this.state.teamId) {
+		if (this.state.arena) {
 			return (
 				<div className='container add-player'>
 					<form onSubmit={this.handleSubmit} className='blue-grey lighten-4'>
@@ -51,6 +68,7 @@ class EditTeam extends Component {
 				</div>
 			)
 		}
+		console.log(this.state)
 		return (
 			<div className="center blue-grey lighten-4">Something went wrong... Please go back...</div>
 		)
@@ -77,6 +95,6 @@ const mapDispatchToProps = (dispatch) => {
 export default compose(
 	connect(mapStateToProps, mapDispatchToProps),
 	firestoreConnect([
-		{ collection: 'players' }
+		{ collection: 'teams' }
 	])
 )(EditTeam);

@@ -22,11 +22,27 @@ class EditPlayer extends Component {
 	}
 	componentDidMount() {
 		if (this.state.firstName) {
-			document.getElementById('firstName').value = this.state.firstName;
-			document.getElementById('lastName').value = this.state.lastName;
-			document.getElementById('number').value = this.state.number;
-			document.getElementById('position').value = this.state.position;
-			document.getElementById('shoots').value = this.state.shoots;
+			localStorage.setItem('firstName', this.state.firstName);
+			localStorage.setItem('lastName', this.state.lastName);
+			localStorage.setItem('number', this.state.number);
+			localStorage.setItem('position', this.state.position);
+			localStorage.setItem('shoots', this.state.shoots);
+		} else {
+			let firstName = localStorage.getItem('firstName'),
+			lastName = localStorage.getItem('lastName'),
+			number = localStorage.getItem('number'),
+			position = localStorage.getItem('position'),
+			shoots = localStorage.getItem('shoots');
+			this.setState({
+				firstName,
+				lastName,
+				number,
+				position,
+				shoots,
+				playerId: this.props.playerId
+			})
+			document.getElementById('position').value = position;
+			document.getElementById('shoots').value = shoots;
 		}
 	}
 	
@@ -40,23 +56,23 @@ class EditPlayer extends Component {
 					<form onSubmit={this.handleSubmit} className='blue-grey lighten-4'>
 	
 						<div className="input-field">
-							<input placeholder='First Name' type='text' id='firstName' onChange={this.handleChange} />
+							<input defaultValue={this.state.firstName} placeholder='First Name' type='text' id='firstName' onChange={this.handleChange} />
 							<label className='active' htmlFor='firstName'>First Name:</label>
 						</div>
 	
 						<div className="input-field">
-							<input placeholder='Last Name' type='text' id='lastName' onChange={this.handleChange} />
+							<input defaultValue={this.state.lastName} placeholder='Last Name' type='text' id='lastName' onChange={this.handleChange} />
 							<label className='active' htmlFor='lastName'>Last Name:</label>
 						</div>
 	
 						<div className="input-field">
-							<input placeholder='Number' type='number' id='number' max='99' min='0' onChange={this.handleChange} />
+							<input defaultValue={this.state.number} placeholder='Number' type='number' id='number' max='99' min='0' onChange={this.handleChange} />
 							<label className='active' htmlFor='number'>Number:</label>
 						</div>
 	
 						<label htmlFor="position">Position</label>
-						<select className=" input-field browser-default" id='position' onChange={this.handleChange}>
-							<option defaultValue="C">C</option>
+						<select defaultValue={this.state.position} className=" input-field browser-default" id='position' onChange={this.handleChange}>
+							<option value="C">C</option>
 							<option value="RW">RW</option>
 							<option value="LW">LW</option>
 							<option value="D">D</option>
@@ -64,8 +80,8 @@ class EditPlayer extends Component {
 						</select>
 	
 						<label htmlFor="shoots">Shoots</label>
-						<select className=" input-field browser-default" id='shoots' onChange={this.handleChange}>
-							<option defaultValue="Right">Right</option>
+						<select defaultValue={this.state.shoots} className=" input-field browser-default" id='shoots' onChange={this.handleChange}>
+							<option value="Right">Right</option>
 							<option value="Left">Left</option>
 						</select>
 	
@@ -77,7 +93,7 @@ class EditPlayer extends Component {
 			)
 		}
 		return (
-			<div className="center blue-grey lighten-4">Something went wrong... Please go back...</div>
+			<div className="center blue-grey lighten-4">Loading...</div>
 		)
 	}
 }
