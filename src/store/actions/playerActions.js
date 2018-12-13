@@ -1,10 +1,18 @@
-export const addPlayer = (player) => {
+export const addPlayer = (props) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
 		const firestore = getFirestore();
-		// const player = getState().firebase.player;
-		// const authorId = getState().firebase.auth.uid;
-		firestore.collection('players').add({
-			...player,
+		const player = {
+			firstName: props.firstName,
+			lastName: props.lastName,
+			number: props.number,
+			position: props.position,
+			shoots: props.shoots,
+			id: (Math.random() * Math.random() * 10).toString()
+		}
+		const players = props.team.players;
+		firestore.collection('teams').doc(props.teamId).set({
+			...props.team,
+			players: [...players, player]
 		}).then(() => {
 			dispatch({ type: 'ADD_PLAYER', player })
 		}).catch((err) => {

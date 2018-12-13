@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 class AddPlayer extends Component {
 	state = {
+		team: this.props.team,
 		firstName: null,
 		lastName: null,
 		number: null,
@@ -73,9 +74,13 @@ class AddPlayer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
 	const id = ownProps.match.params.id
+	const teams = state.firestore.data.teams;
+	const team = teams ? teams[id] : null;
+
 	return {
 		auth: state.firebase.auth,
 		teamId: id,
+		team: team
 	}
 }
 

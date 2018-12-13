@@ -8,7 +8,7 @@ import { deleteTeam } from '../../store/actions/teamActions'
 
 const TeamDetails = (props) => {
 	
-	const { team, teamId, players, auth } = props;
+	const { team, teamId, auth } = props;
 	if (!auth.uid) return <Redirect to='/signin' />
 
 	const deleteThisTeam = () => {
@@ -35,7 +35,7 @@ const TeamDetails = (props) => {
 						<div className="blue-grey team-stat indigo-text text-darken-4 lighten-5">{team.arena}</div>
 					</div>
 				</div>
-				<PlayerList players={players} teamId={teamId} />
+				<PlayerList players={team.players} teamId={teamId} />
 				<button onClick={addPlayerToThisTeam} className="btn green accent-4">Add Player</button>
 				<button onClick={editThisTeam} className="btn amber accent-4">Edit Team</button>
 				<button onClick={deleteThisTeam} className="btn red accent-4">Delete Team</button>
@@ -52,10 +52,8 @@ const TeamDetails = (props) => {
 const mapStateToProps = (state, ownProps) => {
 	const id = ownProps.match.params.id;
 	const teams = state.firestore.data.teams;
-	const players = state.firestore.ordered.players;
 	const team = teams ? teams[id] : null;
 	return {
-		players: players,
 		team: team,
 		teamId: id,
 		auth: state.firebase.auth,
@@ -72,6 +70,5 @@ export default compose(
 	connect(mapStateToProps, mapDispatchToProps),
 	firestoreConnect([
 		{ collection: 'teams' },
-		{ collection: 'players' }
 	])
 )(TeamDetails);

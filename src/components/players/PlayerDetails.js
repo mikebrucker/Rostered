@@ -7,7 +7,7 @@ import { deletePlayer } from '../../store/actions/playerActions';
 import { Redirect } from 'react-router-dom';
 
 const PlayerDetails = (props) => {
-	
+	// console.log(props)
 	const { player, playerId, auth } = props;
 	if (!auth.uid) return <Redirect to='/signin' />
 
@@ -46,12 +46,20 @@ const PlayerDetails = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const id = ownProps.match.params.id;
-	const players = state.firestore.data.players;
-	const player = players ? players[id] : null;
+	const teamId = ownProps.match.params.id;
+	const playerId = ownProps.match.params.type;
+	const teams = state.firestore.data.teams;
+	const team = teams ? teams[teamId] : null;
+	const players = team ? team.players : null;
+	const myPlayer = players ? players.filter(plyr => {
+		return plyr.id === playerId;
+	}) : null;
+	const player = myPlayer ? myPlayer[0] : null;
+	console.log(player)
 	return {
 		player: player,
-		playerId: id,
+		playerId: playerId,
+		teamId: teamId,
 		auth: state.firebase.auth,
 	}
 }
@@ -63,8 +71,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-	connect(mapStateToProps, mapDispatchToProps),
 	firestoreConnect([
-		{ collection: 'players' }
-	])
+		{ collection: 'teams' }
+	]),
+	connect(mapStateToProps, mapDispatchToProps)
 )(PlayerDetails);

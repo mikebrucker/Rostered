@@ -9,7 +9,8 @@ class AddTeam extends Component {
 		teamName: null,
 		league: null,
 		arena: null,
-		sport: 'Hockey'
+		sport: 'Hockey',
+		players: []
 	}
 
 	handleChange = e => {
