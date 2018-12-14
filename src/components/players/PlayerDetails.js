@@ -13,7 +13,7 @@ const PlayerDetails = (props) => {
 
 	const deleteThisPlayer = () => {
 		props.deletePlayer(team, teamId, playerId);
-		props.history.push('/')
+		props.history.push('/team/' + teamId)
 	}
 
 	const editThisPlayer = () => {
