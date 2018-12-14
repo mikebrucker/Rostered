@@ -24,27 +24,15 @@ class EditPlayer extends Component {
 	}
 	componentDidMount() {
 		if (this.state.firstName) {
-			localStorage.setItem('firstName', this.state.firstName);
-			localStorage.setItem('lastName', this.state.lastName);
-			localStorage.setItem('number', this.state.number);
-			localStorage.setItem('position', this.state.position);
-			localStorage.setItem('shoots', this.state.shoots);
+			localStorage.setItem('state', JSON.stringify(this.state));
 		} else {
-			let firstName = localStorage.getItem('firstName'),
-			lastName = localStorage.getItem('lastName'),
-			number = localStorage.getItem('number'),
-			position = localStorage.getItem('position'),
-			shoots = localStorage.getItem('shoots');
+			let localStorageState = localStorage.getItem('state');
+			localStorageState = JSON.parse(localStorageState);
 			this.setState({
-				...this.state,
-				firstName: firstName,
-				lastName: lastName,
-				number: number,
-				position: position,
-				shoots: shoots,
+				...localStorageState
 			})
-			document.getElementById('position').value = position;
-			document.getElementById('shoots').value = shoots;
+			document.getElementById('position').value = localStorageState.position;
+			document.getElementById('shoots').value = localStorageState.shoots;
 		}
 	}
 	

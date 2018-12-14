@@ -60,7 +60,6 @@ const mapStateToProps = (state, ownProps) => {
 		teamId: teamId,
 		player: player,
 		playerId: playerId,
-		teamId: teamId,
 		auth: state.firebase.auth,
 	}
 }

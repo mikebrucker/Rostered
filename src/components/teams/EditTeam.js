@@ -22,18 +22,12 @@ class EditTeam extends Component {
 	}
 	componentDidMount() {
 		if (this.state.teamName) {
-			localStorage.setItem('teamName', this.state.teamName);
-			localStorage.setItem('league', this.state.league);
-			localStorage.setItem('arena', this.state.arena);
+			localStorage.setItem('state', JSON.stringify(this.state));
 		} else {
-			let teamName = localStorage.getItem('teamName'),
-			league = localStorage.getItem('league'),
-			arena = localStorage.getItem('arena');
+			let localStorageState = localStorage.getItem('state');
+			localStorageState = JSON.parse(localStorageState);
 			this.setState({
-				teamName,
-				league,
-				arena,
-				teamId: this.props.teamId
+				...localStorageState
 			})
 		}
 	}
@@ -88,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		editTeam: (team, teamId) => dispatch(editTeam(team, teamId))
+		editTeam: (team) => dispatch(editTeam(team))
 	}
 }
 
