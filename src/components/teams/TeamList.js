@@ -30,7 +30,6 @@ const TeamList = (props) => {
 	)
 
 	const linkToCreateTeam = () => {
-		console.log(props)
 		props.history.push('/addteam')
 	}
 	

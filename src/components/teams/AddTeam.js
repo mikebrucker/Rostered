@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 class AddTeam extends Component {
 	state = {
 		teamOwnerId: this.props.auth.uid,
+		teamId: null,
 		teamName: null,
 		league: null,
 		arena: null,
