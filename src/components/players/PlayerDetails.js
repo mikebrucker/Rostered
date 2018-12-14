@@ -8,16 +8,16 @@ import { Redirect } from 'react-router-dom';
 
 const PlayerDetails = (props) => {
 	// console.log(props)
-	const { player, playerId, auth } = props;
+	const { team, player, playerId, auth, teamId } = props;
 	if (!auth.uid) return <Redirect to='/signin' />
 
 	const deleteThisPlayer = () => {
-		props.deletePlayer(playerId);
+		props.deletePlayer(team, teamId, playerId);
 		props.history.push('/')
 	}
 
 	const editThisPlayer = () => {
-		props.history.push('/player/edit/' + playerId)
+		props.history.push('/team/' + teamId + '/editplayer/' + player.id)
 	}
 
 	if (player) {
@@ -55,8 +55,9 @@ const mapStateToProps = (state, ownProps) => {
 		return plyr.id === playerId;
 	}) : null;
 	const player = myPlayer ? myPlayer[0] : null;
-	console.log(player)
 	return {
+		team: team,
+		teamId: teamId,
 		player: player,
 		playerId: playerId,
 		teamId: teamId,
@@ -66,7 +67,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deletePlayer: (player) => dispatch(deletePlayer(player))
+		deletePlayer: (team, teamId, playerId) => dispatch(deletePlayer(team, teamId, playerId))
 	}
 }
 

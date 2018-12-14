@@ -7,9 +7,11 @@ import { Redirect } from 'react-router-dom';
 
 class EditPlayer extends Component {
 	state = {
+		team: this.props.team,
+		teamId: this.props.teamId,
 		...this.props.player,
-		playerId: this.props.playerId
 	}
+	
 	handleChange = e => {
 		this.setState({
 			[e.target.id]: e.target.value,
@@ -34,12 +36,12 @@ class EditPlayer extends Component {
 			position = localStorage.getItem('position'),
 			shoots = localStorage.getItem('shoots');
 			this.setState({
-				firstName,
-				lastName,
-				number,
-				position,
-				shoots,
-				playerId: this.props.playerId
+				...this.state,
+				firstName: firstName,
+				lastName: lastName,
+				number: number,
+				position: position,
+				shoots: shoots,
 			})
 			document.getElementById('position').value = position;
 			document.getElementById('shoots').value = shoots;
@@ -99,25 +101,32 @@ class EditPlayer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const id = ownProps.match.params.id;
-	const players = state.firestore.data.players;
-	const player = players ? players[id] : null;
+	const teamId = ownProps.match.params.id;
+	const playerId = ownProps.match.params.type;
+	const teams = state.firestore.data.teams;
+	const team = teams ? teams[teamId] : null;
+	const players = team ? team.players : null;
+	const myPlayer = players ? players.filter(plyr => {
+		return plyr.id === playerId;
+	}) : null;
+	const player = myPlayer ? myPlayer[0] : null;
 	return {
+		auth: state.firebase.auth,
+		teamId: teamId,
+		team: team,
 		player: player,
-		playerId: id,
-		auth: state.firebase.auth
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		editPlayer: (player, playerId) => dispatch(editPlayer(player, playerId))
+		editPlayer: (player) => dispatch(editPlayer(player))
 	}
 }
 
 export default compose(
 	connect(mapStateToProps, mapDispatchToProps),
-	firestoreConnect([
-		{ collection: 'players' }
-	])
+	// firestoreConnect([
+	// 	{ collection: 'teams' }
+	// ])
 )(EditPlayer);

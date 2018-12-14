@@ -26,7 +26,7 @@ class App extends Component {
             <Route exact path='/team/addplayer/:id' component={AddPlayer} />
             <Route exact path='/team/edit/:id' component={EditTeam} />
             <Route exact path='/team/:id/player/:type' component={PlayerDetails} />
-            <Route exact path='/player/edit/:id' component={EditPlayer} />
+            <Route exact path='/team/:id/editplayer/:type' component={EditPlayer} />
           </Switch>
         </main>
       </BrowserRouter>
