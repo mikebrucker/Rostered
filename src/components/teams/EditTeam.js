@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editTeam } from '../../store/actions/teamActions';
-import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 
@@ -86,9 +85,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default compose(
-	connect(mapStateToProps, mapDispatchToProps),
-	firestoreConnect([
-		{ collection: 'teams' }
-	])
-)(EditTeam);
+export default connect(mapStateToProps, mapDispatchToProps)(EditTeam);
