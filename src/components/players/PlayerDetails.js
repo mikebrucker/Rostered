@@ -29,7 +29,7 @@ const PlayerDetails = (props) => {
 
 	if (player) {
 		return (
-			<section className="card center player-summary">
+			<section className="card section center player-summary">
 				<div className="container">
 					<h2 className="underline">{player.firstName + ' ' + player.lastName}</h2>
 					<PlayerStatColumns />
@@ -39,14 +39,16 @@ const PlayerDetails = (props) => {
 						<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{player.position}</div>
 						<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{player.shoots}</div>
 					</div>
-					<button onClick={editThisPlayer} className="btn amber accent-4">Edit</button>
-					<div style={{display:'none'}} id="edit-player">
-						<EditPlayer team={team} player={player} />
-					</div>
-					<button onClick={areYouSuredeleteThisPlayer} className="btn red accent-4">Delete Player</button>
-					<div style={{display:'none'}} className="container section red lighten-2" id="delete-player">
-					<div>Are You Sure You Want To Delete This Player?</div>
-						<button onClick={deleteThisPlayer} className="btn red accent-4">Permanently Delete</button>
+					<div className="container">
+						<button onClick={editThisPlayer} className="btn amber accent-4">Edit</button>
+						<div style={{display:'none'}} id="edit-player">
+							<EditPlayer team={team} player={player} />
+						</div>
+						<button onClick={areYouSuredeleteThisPlayer} className="btn red accent-4">Delete Player</button>
+						<div style={{display:'none'}} className="section red lighten-2" id="delete-player">
+						<div>Are You Sure You Want To Delete This Player?</div>
+							<button onClick={deleteThisPlayer} className="btn red accent-4">Permanently Delete</button>
+						</div>
 					</div>
 				</div>
 			</section>

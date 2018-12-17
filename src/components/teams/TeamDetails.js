@@ -51,18 +51,20 @@ const TeamDetails = (props) => {
 						<div className="blue-grey team-stat indigo-text text-darken-4 lighten-5">{team.arena}</div>
 					</div>
 				</div>
-				<button onClick={editThisTeam} className="btn amber accent-4">Edit Team</button>
-				<div style={{display:'none'}} id="edit-team">
-					<EditTeam team={team} />
-				</div>
-				<button onClick={areYouSureDeleteThisTeam} className="btn red accent-4">Delete Team</button>
-				<div style={{display:'none'}} className="container section red lighten-2" id="delete-team">
-					<div>Are You Sure You Want To Delete This Team?</div>
-					<button onClick={deleteThisTeam} className="btn red accent-4">Permanently Delete</button>
-				</div>
-				<button onClick={addPlayerToThisTeam} className="btn green accent-4">Add Player</button>
-				<div style={{display:'none'}} id="add-player">
-					<AddPlayer team={team} />
+				<div className="container">
+					<button onClick={editThisTeam} className="btn amber accent-4">Edit Team</button>
+					<div style={{display:'none'}} id="edit-team">
+						<EditTeam team={team} />
+					</div>
+					<button onClick={areYouSureDeleteThisTeam} className="btn red accent-4">Delete Team</button>
+					<div style={{display:'none'}} className="container section red lighten-2" id="delete-team">
+						<div>Are You Sure You Want To Delete This Team?</div>
+						<button onClick={deleteThisTeam} className="btn red accent-4">Permanently Delete</button>
+					</div>
+					<button onClick={addPlayerToThisTeam} className="btn green accent-4">Add Player</button>
+					<div style={{display:'none'}} id="add-player">
+						<AddPlayer team={team} />
+					</div>
 				</div>
 				<PlayerList players={team.players} teamId={teamId} />
 			</section>
