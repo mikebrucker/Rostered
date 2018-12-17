@@ -21,40 +21,46 @@ class AddPlayer extends Component {
 	}
 	handleSubmit = e => {
 		e.preventDefault();
-		document.getElementById('add-player').style.display = 'none';
-		let uniqueKey = generateUniqueId.init({
-			length: 20,
-			includeSymbols: [
-				'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-			]
-		})
-		const player = {
-			firstName: this.state.firstName,
-			lastName: this.state.lastName,
-			number: this.state.number,
-			position: this.state.position,
-			shoots: this.state.shoots,
-			id: uniqueKey
+		if (this.state.firstName && this.state.lastName && this.state.number && 
+		this.state.firstName.length > 0 && this.state.lastName.length > 0 && this.state.number.length > 0) {
+			document.getElementById('add-player').style.display = 'none';
+			document.getElementById('add-player-error').style.display = 'none';
+			let uniqueKey = generateUniqueId.init({
+				length: 20,
+				includeSymbols: [
+					'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+				]
+			})
+			const player = {
+				firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				number: this.state.number,
+				position: this.state.position,
+				shoots: this.state.shoots,
+				id: uniqueKey
+			}
+			const team = {
+				...this.state.team,
+				players: [...this.state.team.players, player]
+			}
+			this.props.addPlayer(team);
+			this.setState({
+				team: team,
+				teamId: this.props.team.teamId,
+				firstName: null,
+				lastName: null,
+				number: null,
+				position: 'C',
+				shoots: 'Right',	
+			})
+			document.getElementById('firstName').value = '';
+			document.getElementById('lastName').value = '';
+			document.getElementById('number').value = '';
+			document.getElementById('position').value = 'C';
+			document.getElementById('shoots').value = 'Right';
+		} else {
+			document.getElementById('add-player-error').style.display = 'block';
 		}
-		const team = {
-			...this.state.team,
-			players: [...this.state.team.players, player]
-		}
-		this.props.addPlayer(team);
-		this.setState({
-			team: team,
-			teamId: this.props.team.teamId,
-			firstName: null,
-			lastName: null,
-			number: null,
-			position: 'C',
-			shoots: 'Right',	
-		})
-		document.getElementById('firstName').value = '';
-		document.getElementById('lastName').value = '';
-		document.getElementById('number').value = '';
-		document.getElementById('position').value = 'C';
-		document.getElementById('shoots').value = 'Right';
 	}
 
 	render() {
@@ -63,6 +69,7 @@ class AddPlayer extends Component {
 
 		return (
 			<div className='container add-player'>
+				<div style={{display:'none'}} id="add-player-error" className="red-text">Input Fields Cannot Be Empty</div>
 				<form onSubmit={this.handleSubmit} className='blue-grey lighten-4'>
 
 					<div className="input-field">

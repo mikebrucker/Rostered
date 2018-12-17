@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 class EditTeam extends Component {
 	state = {
 		...this.props.team,
-		teamId: this.props.teamId
+		// teamId: this.props.teamId
 	}
 	handleChange = e => {
 		this.setState({
@@ -15,14 +15,21 @@ class EditTeam extends Component {
 	}
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.editTeam(this.state);
-		this.props.history.push('/');
+		if (this.state.teamName && this.state.league && this.state.arena && 
+			this.state.teamName.length > 0 && this.state.league.length > 0 && this.state.arena.length > 0) {
+			document.getElementById('edit-team').style.display = 'none';
+			document.getElementById('edit-team-error').style.display = 'none';
+	
+			this.props.editTeam(this.state);
+		} else {
+			document.getElementById('edit-team-error').style.display = 'block';
+		}
 	}
 	componentDidMount() {
-		if (this.state.teamName) {
-			localStorage.setItem('state', JSON.stringify(this.state));
+		if (this.state) {
+			localStorage.setItem('edit-team-state', JSON.stringify(this.state));
 		} else {
-			let localStorageState = localStorage.getItem('state');
+			let localStorageState = localStorage.getItem('edit-team-state');
 			localStorageState = JSON.parse(localStorageState);
 			this.setState({
 				...localStorageState
@@ -35,7 +42,8 @@ class EditTeam extends Component {
 		if (!auth.uid) return <Redirect to='/signin' />
 		if (this.state.arena) {
 			return (
-				<div className='container add-player'>
+				<div className='container edit-team'>
+					<div style={{display:'none'}} id="edit-team-error" className="red-text">Input Fields Cannot Be Empty</div>
 					<form onSubmit={this.handleSubmit} className='blue-grey lighten-4'>
 	
 						<div className="input-field">
@@ -60,20 +68,14 @@ class EditTeam extends Component {
 				</div>
 			)
 		}
-		console.log(this.state)
 		return (
 			<div className="center blue-grey lighten-4">Something went wrong... Please go back...</div>
 		)
 	}
 }
 
-const mapStateToProps = (state, ownProps) => {
-	const id = ownProps.match.params.id;
-	const teams = state.firestore.data.teams;
-	const team = teams ? teams[id] : null;
+const mapStateToProps = (state) => {
 	return {
-		team: team,
-		teamId: id,
 		auth: state.firebase.auth
 	}
 }
