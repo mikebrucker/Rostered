@@ -5,11 +5,16 @@ import { compose } from 'redux';
 import PlayerStatColumns from '../layout/PlayerStatColumns';
 import { deletePlayer } from '../../store/actions/playerActions';
 import { Redirect } from 'react-router-dom';
+import EditPlayer from './EditPlayer';
 
 const PlayerDetails = (props) => {
-	// console.log(props)
 	const { team, player, playerId, auth, teamId } = props;
 	if (!auth.uid) return <Redirect to='/signin' />
+
+	const areYouSuredeleteThisPlayer = () => {
+		let deleteplayer = document.getElementById('delete-player');
+		deleteplayer.style.display === 'none' ? deleteplayer.style.display = 'block' : deleteplayer.style.display = 'none';
+	}
 
 	const deleteThisPlayer = () => {
 		props.deletePlayer(team, teamId, playerId);
@@ -17,7 +22,9 @@ const PlayerDetails = (props) => {
 	}
 
 	const editThisPlayer = () => {
-		props.history.push('/team/' + teamId + '/editplayer/' + player.id)
+		let editplayer = document.getElementById('edit-player');
+		let editplayererror = document.getElementById('edit-player-error');
+		editplayer.style.display === 'none' ? editplayer.style.display = 'block' : editplayer.style.display = 'none'; editplayererror.style.display = 'none';
 	}
 
 	if (player) {
@@ -33,7 +40,14 @@ const PlayerDetails = (props) => {
 						<div className="blue-grey stat indigo-text text-darken-4 lighten-5">{player.shoots}</div>
 					</div>
 					<button onClick={editThisPlayer} className="btn amber accent-4">Edit</button>
-					<button onClick={deleteThisPlayer} className="btn red accent-4">Delete</button>
+					<div style={{display:'none'}} id="edit-player">
+						<EditPlayer team={team} player={player} />
+					</div>
+					<button onClick={areYouSuredeleteThisPlayer} className="btn red accent-4">Delete Player</button>
+					<div style={{display:'none'}} className="container section red lighten-2" id="delete-player">
+					<div>Are You Sure You Want To Delete This Player?</div>
+						<button onClick={deleteThisPlayer} className="btn red accent-4">Permanently Delete</button>
+					</div>
 				</div>
 			</section>
 		)

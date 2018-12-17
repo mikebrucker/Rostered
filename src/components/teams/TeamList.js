@@ -6,7 +6,7 @@ const TeamList = (props) => {
 	const { teams, auth } = props;
 	
 	const myTeams = teams && teams.length ? teams.filter(team => {
-		return team.teamOwnerId === auth.uid;
+		return team.teamId && team.teamOwnerId === auth.uid;
 	}) : null;
 
 	const myTeamList = myTeams && myTeams.length > 0 ? (

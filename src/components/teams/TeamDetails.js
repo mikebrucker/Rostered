@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import PlayerList from '../players/PlayerList';
 import { deleteTeam } from '../../store/actions/teamActions'
 import AddPlayer from '../players/AddPlayer';
-import EditTeam from '../teams/EditTeam';
+import EditTeam from './EditTeam';
 
 const TeamDetails = (props) => {
 	

@@ -23,7 +23,7 @@ export const editPlayer = (props) => {
 		const players = props.team.players.filter(plyr => {
 			return plyr.id !== props.id
 		});
-		firestore.collection('teams').doc(props.teamId).set({
+		firestore.collection('teams').doc(props.team.teamId).set({
 			...props.team,
 			players: [...players, player]
 		}).then(() => {

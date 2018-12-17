@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 class EditPlayer extends Component {
 	state = {
 		team: this.props.team,
-		teamId: this.props.teamId,
 		...this.props.player,
 	}
 	
@@ -14,11 +13,18 @@ class EditPlayer extends Component {
 		this.setState({
 			[e.target.id]: e.target.value,
 		})
+		console.log(this.state)
 	}
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.editPlayer(this.state);
-		this.props.history.push('/team/' + this.state.teamId);
+		if (this.state.firstName && this.state.lastName && this.state.number && 
+			this.state.firstName.length > 0 && this.state.lastName.length > 0 && this.state.number.length > 0) {
+			document.getElementById('edit-player').style.display = 'none';
+			document.getElementById('edit-player-error').style.display = 'none';
+			this.props.editPlayer(this.state);
+		} else {
+			document.getElementById('edit-player-error').style.display = 'block';
+		}
 	}
 	componentDidMount() {
 		if (this.state.firstName) {
@@ -41,6 +47,7 @@ class EditPlayer extends Component {
 		if (this.state) {
 			return (
 				<div className='container add-player'>
+				<div style={{display:'none'}} id="edit-player-error" className="red-text">Input Fields Cannot Be Empty</div>
 					<form onSubmit={this.handleSubmit} className='blue-grey lighten-4'>
 	
 						<div className="input-field">
@@ -86,21 +93,9 @@ class EditPlayer extends Component {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => {
-	const teamId = ownProps.match.params.id;
-	const playerId = ownProps.match.params.type;
-	const teams = state.firestore.data.teams;
-	const team = teams ? teams[teamId] : null;
-	const players = team ? team.players : null;
-	const myPlayer = players ? players.filter(plyr => {
-		return plyr.id === playerId;
-	}) : null;
-	const player = myPlayer ? myPlayer[0] : null;
+const mapStateToProps = (state) => {
 	return {
 		auth: state.firebase.auth,
-		teamId: teamId,
-		team: team,
-		player: player,
 	}
 }
 
