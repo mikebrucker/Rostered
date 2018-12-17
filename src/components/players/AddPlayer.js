@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addPlayer } from '../../store/actions/playerActions';
 import { Redirect } from 'react-router-dom';
+import generateUniqueId from 'generate-unique-id';
 
 class AddPlayer extends Component {
 	state = {
 		team: this.props.team,
-		teamId: this.props.teamId,
+		teamId: this.props.team.teamId,
 		firstName: null,
 		lastName: null,
 		number: null,
 		position: 'C',
 		shoots: 'Right',
 	}
-
 	handleChange = e => {
 		this.setState({
 			[e.target.id]: e.target.value
@@ -21,8 +21,40 @@ class AddPlayer extends Component {
 	}
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.addPlayer(this.state);
-		this.props.history.push('/team/' + this.state.teamId);
+		let uniqueKey = generateUniqueId.init({
+			length: 20,
+			includeSymbols: [
+				'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+			]
+		})
+		const player = {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			number: this.state.number,
+			position: this.state.position,
+			shoots: this.state.shoots,
+			id: uniqueKey
+		}
+		const team = {
+			...this.state.team,
+			players: [...this.state.team.players, player]
+		}
+		this.props.addPlayer(team);
+		this.setState({
+			team: team,
+			teamId: this.props.team.teamId,
+			firstName: null,
+			lastName: null,
+			number: null,
+			position: 'C',
+			shoots: 'Right',	
+		})
+
+		document.getElementById('firstName').value = '';
+		document.getElementById('lastName').value = '';
+		document.getElementById('number').value = '';
+		document.getElementById('position').value = 'C';
+		document.getElementById('shoots').value = 'Right';
 	}
 
 	render() {
@@ -73,13 +105,8 @@ class AddPlayer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const id = ownProps.match.params.id
-	const teams = state.firestore.data.teams;
-	const team = teams ? teams[id] : null;
 	return {
 		auth: state.firebase.auth,
-		teamId: id,
-		team: team
 	}
 }
 

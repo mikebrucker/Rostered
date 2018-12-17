@@ -1,27 +1,8 @@
-import generateUniqueId from 'generate-unique-id';
-
 export const addPlayer = (props) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
-		const firestore = getFirestore();
-		const player = {
-			firstName: props.firstName,
-			lastName: props.lastName,
-			number: props.number,
-			position: props.position,
-			shoots: props.shoots,
-			id: generateUniqueId.init({
-				length: 20,
-				includeSymbols: [
-					'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-				]
-			})
-		}
-		const players = props.team.players;
-		firestore.collection('teams').doc(props.teamId).set({
-			...props.team,
-			players: [...players, player]
-		}).then(() => {
-			dispatch({ type: 'ADD_PLAYER', player })
+		const firestore = getFirestore();		
+		firestore.collection('teams').doc(props.teamId).set(props).then(() => {
+			dispatch({ type: 'ADD_PLAYER', props })
 		}).catch((err) => {
 			dispatch({ type: 'ADD_PLAYER_ERROR', err })
 		})

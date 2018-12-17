@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editTeam } from '../../store/actions/teamActions';
-import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 
 class EditTeam extends Component {

@@ -23,8 +23,8 @@ class App extends Component {
             <Route path='/signup' component={SignUp} />
             <Route path='/addteam' component={AddTeam} />
             <Route exact path='/team/:id' component={TeamDetails} />
-            <Route exact path='/team/addplayer/:id' component={AddPlayer} />
             <Route exact path='/team/edit/:id' component={EditTeam} />
+            <Route exact path='/team/:id/addplayer/' component={AddPlayer} />
             <Route exact path='/team/:id/player/:type' component={PlayerDetails} />
             <Route exact path='/team/:id/editplayer/:type' component={EditPlayer} />
           </Switch>

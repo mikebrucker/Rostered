@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editPlayer } from '../../store/actions/playerActions';
-import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 
 class EditPlayer extends Component {

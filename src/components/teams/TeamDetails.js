@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 import PlayerList from '../players/PlayerList';
 import { deleteTeam } from '../../store/actions/teamActions'
+import AddPlayer from '../players/AddPlayer';
 
 const TeamDetails = (props) => {
 	
@@ -21,7 +22,7 @@ const TeamDetails = (props) => {
 	}
 
 	const addPlayerToThisTeam = () => {
-		props.history.push('/team/addplayer/' + teamId)
+		props.history.push('/team/' + teamId + '/addplayer/')
 	}
 
 	if (team) {
@@ -36,6 +37,7 @@ const TeamDetails = (props) => {
 					</div>
 				</div>
 				<PlayerList players={team.players} teamId={teamId} />
+				<AddPlayer team={team} />
 				<button onClick={addPlayerToThisTeam} className="btn green accent-4">Add Player</button>
 				<button onClick={editThisTeam} className="btn amber accent-4">Edit Team</button>
 				<button onClick={deleteThisTeam} className="btn red accent-4">Delete Team</button>
