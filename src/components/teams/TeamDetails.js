@@ -21,10 +21,11 @@ const TeamDetails = (props) => {
 		props.history.push('/team/edit/' + teamId)
 	}
 
-	const addPlayerToThisTeam = () => {
-		props.history.push('/team/' + teamId + '/addplayer/')
+	const addPlayerToThisTeam = (e) => {
+		let addp = document.getElementById('add-player');
+		addp.style.display === 'none' ? addp.style.display = 'block' : addp.style.display = 'none';
 	}
-
+	
 	if (team) {
 		return (
 			<section className="card center team-details">
@@ -37,7 +38,9 @@ const TeamDetails = (props) => {
 					</div>
 				</div>
 				<PlayerList players={team.players} teamId={teamId} />
-				<AddPlayer team={team} />
+				<div style={{display:'none'}} id="add-player">
+					<AddPlayer team={team} />
+				</div>
 				<button onClick={addPlayerToThisTeam} className="btn green accent-4">Add Player</button>
 				<button onClick={editThisTeam} className="btn amber accent-4">Edit Team</button>
 				<button onClick={deleteThisTeam} className="btn red accent-4">Delete Team</button>

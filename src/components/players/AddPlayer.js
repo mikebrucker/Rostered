@@ -21,6 +21,7 @@ class AddPlayer extends Component {
 	}
 	handleSubmit = e => {
 		e.preventDefault();
+		document.getElementById('add-player').style.display = 'none';
 		let uniqueKey = generateUniqueId.init({
 			length: 20,
 			includeSymbols: [
@@ -49,7 +50,6 @@ class AddPlayer extends Component {
 			position: 'C',
 			shoots: 'Right',	
 		})
-
 		document.getElementById('firstName').value = '';
 		document.getElementById('lastName').value = '';
 		document.getElementById('number').value = '';
