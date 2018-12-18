@@ -11,7 +11,8 @@ class AddTeam extends Component {
 		league: null,
 		arena: null,
 		sport: 'Hockey',
-		players: []
+		players: [],
+		schedules: []
 	}
 
 	handleChange = e => {
@@ -33,7 +34,8 @@ class AddTeam extends Component {
 				league: null,
 				arena: null,
 				sport: 'Hockey',
-				players: []		
+				players: [],
+				schedules: []	
 			})
 			document.getElementById('teamName').value = '';
 			document.getElementById('league').value = '';
@@ -42,7 +44,6 @@ class AddTeam extends Component {
 		} else {
 			document.getElementById('add-team-error').style.display = 'block';
 		}
-		
 	}
 
 	render() {

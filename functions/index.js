@@ -19,6 +19,7 @@ exports.teamCreated = functions.firestore
 				arena: teamdata.arena,
 				league: teamdata.league,
 				players: teamdata.players,
+				schedules: teamdata.schedules,
 				sport: teamdata.sport,
 				teamName: teamdata.teamName,
 				teamOwnerId: teamdata.teamOwnerId,

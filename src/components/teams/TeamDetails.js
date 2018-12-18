@@ -7,6 +7,7 @@ import PlayerList from '../players/PlayerList';
 import { deleteTeam } from '../../store/actions/teamActions'
 import AddPlayer from '../players/AddPlayer';
 import EditTeam from './EditTeam';
+import AddSchedule from '../schedules/AddSchedule';
 
 const TeamDetails = (props) => {
 	
@@ -33,6 +34,12 @@ const TeamDetails = (props) => {
 		let addplayer = document.getElementById('add-player');
 		let addplayererror = document.getElementById('add-player-error');
 		addplayer.style.display === 'none' ? addplayer.style.display = 'block' : addplayer.style.display = 'none'; addplayererror.style.display = 'none';
+	}
+
+	const addScheduleToThisTeam = (e) => {
+		let addschedule = document.getElementById('add-schedule');
+		let addscheduleerror = document.getElementById('add-schedule-error');
+		addschedule.style.display === 'none' ? addschedule.style.display = 'block' : addschedule.style.display = 'none'; addscheduleerror.style.display = 'none';
 	}
 	
 	if (team) {
@@ -64,6 +71,10 @@ const TeamDetails = (props) => {
 					<button onClick={addPlayerToThisTeam} className="btn green accent-4">Add Player</button>
 					<div style={{display:'none'}} id="add-player">
 						<AddPlayer team={team} />
+					</div>
+					<button onClick={addScheduleToThisTeam} className="btn green accent-4">Add Schedule</button>
+					<div style={{display:'none'}} id="add-schedule">
+						<AddSchedule team={team} />
 					</div>
 				</div>
 				<PlayerList players={team.players} teamId={teamId} />

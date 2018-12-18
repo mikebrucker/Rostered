@@ -1,9 +1,7 @@
 export const addTeam = (team) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
 		const firestore = getFirestore();
-		firestore.collection('teams').add({
-			...team,
-		}).then(() => {
+		firestore.collection('teams').add(team).then(() => {
 			dispatch({ type: 'ADD_TEAM', team })
 		}).catch((err) => {
 			dispatch({ type: 'ADD_TEAM_ERROR', err })
