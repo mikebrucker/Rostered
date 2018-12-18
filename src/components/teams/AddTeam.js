@@ -21,8 +21,28 @@ class AddTeam extends Component {
 	}
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.addTeam(this.state);
-		this.props.history.push('/');
+		if (this.state.teamName && this.state.league && this.state.arena && 
+		this.state.teamName.length > 0 && this.state.league.length > 0 && this.state.arena.length > 0) {
+			document.getElementById('add-team').style.display = 'none';
+			document.getElementById('add-team-error').style.display = 'none';
+			this.props.addTeam(this.state);
+			this.setState({
+				teamOwnerId: this.props.auth.uid,
+				teamId: null,
+				teamName: null,
+				league: null,
+				arena: null,
+				sport: 'Hockey',
+				players: []		
+			})
+			document.getElementById('teamName').value = '';
+			document.getElementById('league').value = '';
+			document.getElementById('arena').value = '';
+			document.getElementById('sport').value = 'Hockey';
+		} else {
+			document.getElementById('add-team-error').style.display = 'block';
+		}
+		
 	}
 
 	render() {
@@ -30,7 +50,8 @@ class AddTeam extends Component {
 		if (!auth.uid) return <Redirect to='/signin' />
 
 		return (
-			<div className='container add-player'>
+			<div className='container add-team'>
+			<div style={{display:'none'}} id="add-team-error" className="red-text">Input Fields Cannot Be Empty</div>
 				<form onSubmit={this.handleSubmit} className='blue-grey lighten-4'>
 
 					<div className="input-field">

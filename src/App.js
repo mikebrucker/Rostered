@@ -6,7 +6,6 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import PlayerDetails from './components/players/PlayerDetails';
 import TeamDetails from './components/teams/TeamDetails';
-import AddTeam from './components/teams/AddTeam';
 
 class App extends Component {
   render() {
@@ -18,7 +17,6 @@ class App extends Component {
             <Route exact path='/' component={Dashboard} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
-            <Route path='/addteam' component={AddTeam} />
             <Route exact path='/team/:id' component={TeamDetails} />
             <Route exact path='/team/:id/player/:type' component={PlayerDetails} />
           </Switch>
