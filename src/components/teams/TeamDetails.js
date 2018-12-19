@@ -8,6 +8,8 @@ import { deleteTeam } from '../../store/actions/teamActions'
 import AddPlayer from '../players/AddPlayer';
 import EditTeam from './EditTeam';
 import AddSchedule from '../schedules/AddSchedule';
+import CurrentScheduleList from '../schedules/CurrentScheduleList';
+import NotCurrentScheduleList from '../schedules/NotCurrentScheduleList';
 
 const TeamDetails = (props) => {
 	
@@ -78,6 +80,8 @@ const TeamDetails = (props) => {
 					</div>
 				</div>
 				<PlayerList players={team.players} teamId={teamId} />
+				<CurrentScheduleList team={team} />
+				<NotCurrentScheduleList team={team} />
 			</section>
 		)
 	}

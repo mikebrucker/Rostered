@@ -40,7 +40,7 @@ input[type=number]:focus + label {
   color: red !important;
 }
 
-.stat, .team-stat {
+.stat, .team-stat, .game-stat {
   border: 2px solid silver;
   border-left: none;
   display: inline-block;
@@ -54,6 +54,11 @@ input[type=number]:focus + label {
   width: 33.333%;
 }
 
+.game-stat {
+  width: 50%;
+}
+
+.game-summary .game-stat:first-of-type,
 .player-summary .stat:first-of-type,
 .team-details .team-stat:first-of-type,
 .team-list .team-stat:first-of-type {

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 class EditGame extends Component {
 	render() {
-		<p>EditGame</p>
+		return(
+			<p>EditGame</p>
+		)
 	}
 }
 

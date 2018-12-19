@@ -34,9 +34,12 @@ class AddSchedule extends Component {
 				games: [],
 				id: uniqueKey
 			}
+			const schedules = schedule.current ? this.state.team.schedules.map(sched => {
+				return {...sched, current: false}
+			}) : this.state.team.schedules
 			const team = {
 				...this.state.team,
-				schedules: [...this.state.team.schedules, schedule]
+				schedules: [...schedules, schedule]
 			}
 			this.props.addSchedule(team);
 			this.setState({
