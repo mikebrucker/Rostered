@@ -1,5 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Rostered
 
+This is a hockey team roster app created with React, Redux, and Firestore.<br>
+Create an account and then create your team/schedule/games/players.<br>
+
+If you are cloning this you will need to set up your own Firebase Firestore for data storage.<br>
+1. Create a config folder on the same level as components
+1. Create firebaseConfig.js inside that folder and get the details from Firebase. It Should look like:
+```
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+var config = {
+	apiKey: "Your API Key",
+	authDomain: "your-app.firebaseapp.com",
+	databaseURL: "https://your-app.firebaseio.com",
+	projectId: "your-app",
+	storageBucket: "your-app.appspot.com",
+	messagingSenderId: "012345678901"
+};
+firebase.initializeApp(config);
+firebase.firestore().settings({ timestampsInSnapshots: true });
+
+export default firebase;
+```
 ## Available Scripts
 
 In the project directory, you can run:
@@ -42,3 +66,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
