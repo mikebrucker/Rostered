@@ -6,6 +6,7 @@ import PlayerStatColumns from '../layout/PlayerStatColumns';
 import { deletePlayer } from '../../store/actions/playerActions';
 import { Redirect } from 'react-router-dom';
 import EditPlayer from './EditPlayer';
+import { Link } from 'react-router-dom';
 
 const PlayerDetails = (props) => {
 	const { team, player, playerId, auth, teamId } = props;
@@ -30,6 +31,10 @@ const PlayerDetails = (props) => {
 	if (player) {
 		return (
 			<section className="card section center player-summary">
+				<Link to={'/team/' + team.teamId}>
+					<h2>{team.teamName}</h2>
+				</Link>
+
 				<div className="container">
 					<h2 className="underline">{player.firstName + ' ' + player.lastName}</h2>
 					<PlayerStatColumns />

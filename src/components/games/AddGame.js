@@ -47,7 +47,7 @@ class AddGame extends Component {
 				return sched.id !== this.state.schedule.id
 			})
 			const team = {
-				...this.props.team,
+				...this.state.team,
 				schedules: [
 					...schedules,
 					schedule
@@ -55,8 +55,9 @@ class AddGame extends Component {
 			}
 			this.props.addGame(team);
 			this.setState({
-				myTeam: team,
+				team: team,
 				schedule: schedule,
+				myTeam: team.teamName,
 				opponent: null,
 				time: null,
 				date: null
@@ -74,8 +75,8 @@ class AddGame extends Component {
 		if (!auth.uid) return <Redirect to='/signin' />
 
 		return (
-			<div className='container add-player'>
-				<div style={{display:'none'}} id="add-player-error" className="red-text">Input Fields Cannot Be Empty</div>
+			<div className='container add-game'>
+				<div style={{display:'none'}} id="add-game-error" className="red-text">Input Fields Cannot Be Empty</div>
 				<form onSubmit={this.handleSubmit} className='blue-grey lighten-4'>
 
 					<div className="input-field">
@@ -84,7 +85,7 @@ class AddGame extends Component {
 					</div>
 
 					<div className="input-field">
-						<input placeholder='Time' type='time' id='time' onChange={this.handleChange} />
+						<input placeholder='Time' type='time' id='time' step='300' onChange={this.handleChange} />
 						<label htmlFor='time'>Time:</label>
 					</div>
 

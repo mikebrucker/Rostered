@@ -15,13 +15,19 @@ const NotCurrentScheduleList = (props) => {
 			</Link>
 		)
 	}) : null;
-	
-	return (
-		<div className="team-list container grey lighten-5 center section">
-			<h4>Other Schedules</h4>
-			{ myNotCurrentSchedules }
-		</div>
-	)
+
+	if (myNotCurrentSchedules.length > 0) {
+		return (
+			<div className="team-list container grey lighten-5 center section">
+				<h4>Other Schedules</h4>
+				{ myNotCurrentSchedules }
+			</div>
+		)
+	} else {
+		return (
+			<div></div>
+		)
+	}
 }
 
 export default withRouter((NotCurrentScheduleList));

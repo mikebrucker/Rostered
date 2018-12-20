@@ -10,6 +10,7 @@ import EditTeam from './EditTeam';
 import AddSchedule from '../schedules/AddSchedule';
 import CurrentScheduleList from '../schedules/CurrentScheduleList';
 import NotCurrentScheduleList from '../schedules/NotCurrentScheduleList';
+import { Link } from 'react-router-dom';
 
 const TeamDetails = (props) => {
 	
@@ -47,7 +48,9 @@ const TeamDetails = (props) => {
 	if (team) {
 		return (
 			<section className="card center team-details">
-				<h2 className="underline">{team.teamName}</h2>
+				<Link to={'/team/' + team.teamId}>
+					<h2>{team.teamName}</h2>
+				</Link>
 				<div className="container section">
 					<div className="card">
 						<div className="blue-grey team-stat black-text text-darken-4 lighten-5">Team Name</div>

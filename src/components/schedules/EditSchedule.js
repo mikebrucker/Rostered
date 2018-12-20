@@ -12,8 +12,9 @@ class EditSchedule extends Component {
 	}
 	
 	handleChange = e => {
+		const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
 		this.setState({
-			[e.target.id]: e.target.value,
+			[e.target.id]: value,
 		})
 		console.log(this.state)
 	}
