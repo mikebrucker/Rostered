@@ -39,38 +39,44 @@ const CurrentScheduleList = (props) => {
 		}
 	}
 	
-	return (
-		<div className="team-list card grey lighten-5 center section">
-			<h4>Current Schedule</h4>
+	if (myCurrentSchedule) {
+		return (
+			<div className="team-list card grey lighten-5 center section">
+				<h4>Current Schedule</h4>
 
-			<button className='btn amber accent-4' onClick={linkToEditSchedule}>Edit Schedule</button>
-			<div style={{display:'none'}} id="edit-schedule">
-				<EditSchedule team={team} schedule={myCurrentSchedule} />
+				<button className='btn amber accent-4' onClick={linkToEditSchedule}>Edit Schedule</button>
+				<div style={{display:'none'}} id="edit-schedule">
+					<EditSchedule team={team} schedule={myCurrentSchedule} />
+				</div>
+
+				<button className='btn red accent-4' onClick={linkToDeleteSchedule}>Delete Schedule</button>
+				<div style={{display:'none'}} className="section red lighten-2" id="delete-schedule">
+					<div>Are You Sure You Want To Delete This Schedule?</div>
+					<button onClick={deleteThisSchedule} className="btn red accent-4">Permanently Delete</button>
+				</div>
+
+				<button className='btn green accent-4' onClick={linkToAddGame}>Add Game</button>
+				<div style={{display:'none'}} id="add-game">
+					<div style={{display:'none'}} id="add-game-error" className="red-text">Input Fields Cannot Be Empty</div>
+					<AddGame team={team} schedule={myCurrentSchedule} />
+				</div>
+
+				<button className='btn amber accent-4' onClick={linkToEditGames}>Edit Games</button>
+
+				<div className="container">
+					<Link to={'/team/' + team.teamId + '/schedule/' + myCurrentSchedule.id}>
+						<h5 className="blue-grey black-text section card text-darken-4 lighten-5">Season: {myCurrentSchedule.season}</h5>
+					</Link>
+					<GameList team={team} schedule={myCurrentSchedule} />
+				</div>
+
 			</div>
-
-			<button className='btn red accent-4' onClick={linkToDeleteSchedule}>Delete Schedule</button>
-			<div style={{display:'none'}} className="section red lighten-2" id="delete-schedule">
-				<div>Are You Sure You Want To Delete This Schedule?</div>
-				<button onClick={deleteThisSchedule} className="btn red accent-4">Permanently Delete</button>
-			</div>
-
-			<button className='btn green accent-4' onClick={linkToAddGame}>Add Game</button>
-			<div style={{display:'none'}} id="add-game">
-				<div style={{display:'none'}} id="add-game-error" className="red-text">Input Fields Cannot Be Empty</div>
-				<AddGame team={team} schedule={myCurrentSchedule} />
-			</div>
-
-			<button className='btn amber accent-4' onClick={linkToEditGames}>Edit Games</button>
-
-			<div className="container">
-				<Link to={'/team/' + team.teamId + '/schedule/' + myCurrentSchedule.id}>
-					<h5 className="blue-grey black-text section card text-darken-4 lighten-5">Season: {myCurrentSchedule.season}</h5>
-				</Link>
-				<GameList team={team} schedule={myCurrentSchedule} />
-			</div>
-
-		</div>
-	)
+		)
+	} else {
+		return (
+			<div className="team-list card grey lighten-5 center section">No Current Schedules...</div>
+		)
+	}
 }
 
 const mapDispatchToProps = (dispatch) => {
