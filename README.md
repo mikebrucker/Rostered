@@ -6,24 +6,26 @@ Create an account and then create your team/schedule/games/players.<br>
 If you are cloning this you will need to set up your own Firebase Firestore for data storage.<br>
 1. Create a config folder on the same level as components
 1. Create firebaseConfig.js inside that folder and get the details from Firebase. It Should look like:
-```
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+	```javascript
+	import firebase from 'firebase/app';
+	import 'firebase/firestore';
+	import 'firebase/auth';
 
-var config = {
-	apiKey: "Your API Key",
-	authDomain: "your-app.firebaseapp.com",
-	databaseURL: "https://your-app.firebaseio.com",
-	projectId: "your-app",
-	storageBucket: "your-app.appspot.com",
-	messagingSenderId: "012345678901"
-};
-firebase.initializeApp(config);
-firebase.firestore().settings({ timestampsInSnapshots: true });
+	var config = {
+		apiKey: "Your API Key",
+		authDomain: "your-app.firebaseapp.com",
+		databaseURL: "https://your-app.firebaseio.com",
+		projectId: "your-app",
+		storageBucket: "your-app.appspot.com",
+		messagingSenderId: "012345678901"
+	};
+	firebase.initializeApp(config);
+	firebase.firestore().settings({ timestampsInSnapshots: true });
 
-export default firebase;
-```
+	export default firebase;
+	```
+1. You need to at least deploy the functions to firebase for the teamId to be added for the app to work correctly<br>
+`firebase deploy --only functions`
 ## Available Scripts
 
 In the project directory, you can run:
