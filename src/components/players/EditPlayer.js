@@ -28,9 +28,9 @@ class EditPlayer extends Component {
 	}
 	componentDidMount() {
 		if (this.state.firstName) {
-			localStorage.setItem('editPlayerState', JSON.stringify(this.state));
+			localStorage.setItem('edit-player-state', JSON.stringify(this.state));
 		} else {
-			let localStorageState = localStorage.getItem('editPlayerState');
+			let localStorageState = localStorage.getItem('edit-player-state');
 			localStorageState = JSON.parse(localStorageState);
 			this.setState({
 				...localStorageState

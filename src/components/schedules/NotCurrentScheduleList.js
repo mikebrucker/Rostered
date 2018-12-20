@@ -11,7 +11,7 @@ const NotCurrentScheduleList = (props) => {
 	const myNotCurrentSchedules = notCurrentSchedules ? notCurrentSchedules.map(sched => {
 		return (
 			<Link to={'/team/' + team.teamId + '/schedule/' + sched.id} key={sched.id}>
-				<div className="center card">Season: {sched.season}</div>
+				<h6 className="center section black-text card">Season: {sched.season}</h6>
 			</Link>
 		)
 	}) : null;

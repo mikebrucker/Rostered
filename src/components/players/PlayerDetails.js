@@ -32,7 +32,7 @@ const PlayerDetails = (props) => {
 		return (
 			<section className="card section center player-summary">
 				<Link to={'/team/' + team.teamId}>
-					<h2>{team.teamName}</h2>
+					<h2 className='white-text black'>{team.teamName}</h2>
 				</Link>
 
 				<div className="container">

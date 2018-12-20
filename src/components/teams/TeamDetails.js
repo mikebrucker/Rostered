@@ -47,9 +47,9 @@ const TeamDetails = (props) => {
 	
 	if (team) {
 		return (
-			<section className="card center team-details">
+			<section className="card section center team-details">
 				<Link to={'/team/' + team.teamId}>
-					<h2>{team.teamName}</h2>
+					<h2 className='white-text black'>{team.teamName}</h2>
 				</Link>
 				<div className="container section">
 					<div className="card">

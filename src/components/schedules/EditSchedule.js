@@ -55,9 +55,9 @@ class EditSchedule extends Component {
 	}
 	componentDidMount() {
 		if (this.state.season) {
-			localStorage.setItem('editScheduleState', JSON.stringify(this.state));
+			localStorage.setItem('edit-schedule-state', JSON.stringify(this.state));
 		} else {
-			let localStorageState = localStorage.getItem('editScheduleState');
+			let localStorageState = localStorage.getItem('edit-schedule-state');
 			localStorageState = JSON.parse(localStorageState);
 			this.setState({
 				...localStorageState

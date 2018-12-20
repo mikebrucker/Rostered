@@ -40,7 +40,7 @@ const ScheduleDetails = (props) => {
 		return (
 			<div className="team-list card grey lighten-5 center section">
 				<Link to={'/team/' + team.teamId}>
-					<h2>{team.teamName}</h2>
+					<h2 className='white-text black'>{team.teamName}</h2>
 				</Link>
 				<h4>Schedule</h4>
 				<button className='btn amber accent-4' onClick={linkToEditSchedule}>Edit Schedule</button>
@@ -55,7 +55,7 @@ const ScheduleDetails = (props) => {
 
 				<p>Current Season? { schedule.current ? 'Yes' : 'No' }</p>
 				<button className='btn green accent-4' onClick={linkToAddGame}>Add Game</button>
-				<button className='btn amber accent-4' onClick={linkToEditGames}>Edit Game</button>
+				<button className='btn amber accent-4' onClick={linkToEditGames}>Edit Games</button>
 				<div style={{display:'none'}} id="add-game">
 					<AddGame team={team} schedule={schedule} />
 				</div>

@@ -67,9 +67,9 @@ class EditGame extends Component {
 	}
 	componentDidMount() {
 		if (this.state.opponent) {
-			localStorage.setItem('editGameState', JSON.stringify(this.state));
+			localStorage.setItem('edit-game-state', JSON.stringify(this.state));
 		} else {
-			let localStorageState = localStorage.getItem('editGameState');
+			let localStorageState = localStorage.getItem('edit-game-state');
 			localStorageState = JSON.parse(localStorageState);
 			this.setState({
 				...localStorageState
