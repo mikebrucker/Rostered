@@ -13,9 +13,9 @@ export const editTeam = (team) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
 		const firestore = getFirestore();
 		firestore.collection('teams').doc(team.teamId).update({
-			teamName: team.teamName,
-			league: team.league,
-			arena: team.arena,
+			teamName,
+			league,
+			arena,
 		}).then(() => {
 			dispatch({ type: 'EDIT_TEAM', team })
 		}).catch((err) => {

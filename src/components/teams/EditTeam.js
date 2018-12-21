@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 class EditTeam extends Component {
 	state = {
 		...this.props.team,
-		// teamId: this.props.teamId
 	}
 	handleChange = e => {
 		this.setState({
