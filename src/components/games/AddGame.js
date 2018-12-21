@@ -6,8 +6,8 @@ import generateUniqueId from 'generate-unique-id';
 
 class AddGame extends Component {
 	state = {
-		team: this.props.team,
-		schedule: this.props.schedule,
+		teamId: this.props.team.teamId,
+		scheduleId: this.props.schedule.id,
 		myTeam: this.props.team.teamName,
 		opponent: null,
 		time: null,
@@ -36,32 +36,19 @@ class AddGame extends Component {
 				opponent: this.state.opponent,
 				time: this.state.time,
 				date: this.state.date,
-				id: uniqueKey
+				id: uniqueKey,
+				teamId: this.state.teamId,
+				scheduleId: this.state.scheduleId,		
 			}
-			const games = [...this.state.schedule.games, game];
-			const schedule = {
-				...this.state.schedule,
-				games: games
-			}
-			const schedules = this.state.team.schedules.filter(sched => {
-				return sched.id !== this.state.schedule.id
-			})
-			const team = {
-				...this.state.team,
-				schedules: [
-					...schedules,
-					schedule
-				]
-			}
-			this.props.addGame(team);
+			this.props.addGame(game);
 			this.setState({
-				team: team,
-				schedule: schedule,
-				myTeam: team.teamName,
+				teamId: this.props.team.teamId,
+				scheduleId: this.props.schedule.id,
+				myTeam: this.props.team.teamName,
 				opponent: null,
 				time: null,
 				date: null
-			})
+					})
 			document.getElementById('opponent').value = '';
 			document.getElementById('time').value = '';
 			document.getElementById('date').value = '';

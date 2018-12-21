@@ -30,7 +30,7 @@ const CurrentScheduleList = (props) => {
 		deleteschedule.style.display === 'none' ? deleteschedule.style.display = 'block' : deleteschedule.style.display = 'none';
 	}
 	const deleteThisSchedule = () => {
-		props.deleteSchedule(team, myCurrentSchedule.id);
+		props.deleteSchedule(team.teamId, myCurrentSchedule.id);
 	}
 	const linkToEditGames = () => {
 		let editgame = document.getElementsByClassName('edit-game');
@@ -81,7 +81,7 @@ const CurrentScheduleList = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deleteSchedule: (team, scheduleId) => dispatch(deleteSchedule(team, scheduleId))
+		deleteSchedule: (teamId, scheduleId) => dispatch(deleteSchedule(teamId, scheduleId))
 	}
 }
 

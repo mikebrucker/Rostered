@@ -24,7 +24,7 @@ const GameSummary = (props) => {
 		deletegame.style.display === 'none' ? deletegame.style.display = 'block' : deletegame.style.display = 'none';
 	}
 	const deleteThisGame = () => {
-		props.deleteGame(team, schedule, game);
+		props.deleteGame(team.teamId, schedule.id, game.id);
 		let editgame = document.getElementsByClassName('edit-game');
 		for (let elem of editgame) {
 			elem.style.display === 'none' ? elem.style.display = 'block' : elem.style.display = 'none';
@@ -51,7 +51,7 @@ const GameSummary = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deleteGame: (team, schedule, game) => dispatch(deleteGame(team, schedule, game))
+		deleteGame: (teamId, scheduleId, gameId) => dispatch(deleteGame(teamId, scheduleId, gameId))
 	}
 }
 

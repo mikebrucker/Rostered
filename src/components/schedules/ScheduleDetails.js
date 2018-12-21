@@ -33,14 +33,14 @@ const ScheduleDetails = (props) => {
 		}
 	}
 	const deleteThisSchedule = () => {
-		props.deleteSchedule(team, scheduleId);
+		props.deleteSchedule(teamId, scheduleId);
 		props.history.push('/team/' + teamId);
 	}
 	if (schedule){
 		return (
 			<div className="team-list card grey lighten-5 center section">
 				<Link to={'/team/' + team.teamId}>
-					<h2 className='white-text black'>{team.teamName}</h2>
+					<h1 className='white-text container black'>{team.teamName}</h1>
 				</Link>
 				<h4>Schedule</h4>
 				<button className='btn amber accent-4' onClick={linkToEditSchedule}>Edit Schedule</button>
@@ -61,7 +61,7 @@ const ScheduleDetails = (props) => {
 				</div>
 				<div className="container">
 					<Link to={'/team/' + teamId + '/schedule/' + scheduleId}>
-						<h5 className="blue-grey black-text text-darken-4 lighten-5">Season: {schedule.season}</h5>
+						<h5 className="blue-grey black-text section card text-darken-4 lighten-5">Season: {schedule.season}</h5>
 					</Link>
 					<GameList team={team} schedule={schedule} />
 				</div>
@@ -95,7 +95,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deleteSchedule: (team, scheduleId) => dispatch(deleteSchedule(team, scheduleId))
+		deleteSchedule: (teamId, scheduleId) => dispatch(deleteSchedule(teamId, scheduleId))
 	}
 }
 

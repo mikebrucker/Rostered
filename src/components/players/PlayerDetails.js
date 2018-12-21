@@ -18,7 +18,7 @@ const PlayerDetails = (props) => {
 	}
 
 	const deleteThisPlayer = () => {
-		props.deletePlayer(team, teamId, playerId);
+		props.deletePlayer(teamId, playerId);
 		props.history.push('/team/' + teamId)
 	}
 
@@ -32,7 +32,7 @@ const PlayerDetails = (props) => {
 		return (
 			<section className="card section center player-summary">
 				<Link to={'/team/' + team.teamId}>
-					<h2 className='white-text black'>{team.teamName}</h2>
+					<h1 className='white-text container black'>{team.teamName}</h1>
 				</Link>
 
 				<div className="container">
@@ -87,7 +87,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deletePlayer: (team, teamId, playerId) => dispatch(deletePlayer(team, teamId, playerId))
+		deletePlayer: (teamId, playerId) => dispatch(deletePlayer(teamId, playerId))
 	}
 }
 

@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 class EditPlayer extends Component {
 	state = {
-		team: this.props.team,
+		teamId: this.props.team.teamId,
 		...this.props.player,
 	}
 	

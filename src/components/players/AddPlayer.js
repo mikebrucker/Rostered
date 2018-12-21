@@ -6,7 +6,6 @@ import generateUniqueId from 'generate-unique-id';
 
 class AddPlayer extends Component {
 	state = {
-		team: this.props.team,
 		teamId: this.props.team.teamId,
 		firstName: null,
 		lastName: null,
@@ -37,15 +36,11 @@ class AddPlayer extends Component {
 				number: this.state.number,
 				position: this.state.position,
 				shoots: this.state.shoots,
-				id: uniqueKey
+				id: uniqueKey,
+				teamId: this.state.teamId,
 			}
-			const team = {
-				...this.state.team,
-				players: [...this.state.team.players, player]
-			}
-			this.props.addPlayer(team);
+			this.props.addPlayer(player);
 			this.setState({
-				team: team,
 				teamId: this.props.team.teamId,
 				firstName: null,
 				lastName: null,

@@ -5,8 +5,8 @@ import { Redirect } from 'react-router-dom';
 
 class EditGame extends Component {
 	state = {
-		team: this.props.team,
-		schedule: this.props.schedule,
+		teamId: this.props.team.teamId,
+		scheduleId: this.props.schedule.id,
 		myTeam: this.props.team.teamName,
 		opponent: this.props.game.opponent,
 		time: this.props.game.time,
@@ -19,7 +19,6 @@ class EditGame extends Component {
 		this.setState({
 			[target]: e.target.value,
 		})
-		console.log(this.state)
 	}
 	handleSubmit = e => {
 		e.preventDefault();
@@ -27,40 +26,7 @@ class EditGame extends Component {
 			this.state.opponent.length > 0 && this.state.time.length > 0 && this.state.date.length > 0) {
 			document.getElementById('edit-game' + this.state.id).style.display = 'none';
 			document.getElementById('edit-game-error' + this.state.id).style.display = 'none';
-			const game = {
-				myTeam: this.state.myTeam,
-				opponent: this.state.opponent,
-				time: this.state.time,
-				date: this.state.date,
-				id: this.state.id
-			}
-			const otherGames = this.state.schedule.games.filter(gme => {
-				return gme.id !== this.state.id
-			})
-			const games = [...otherGames, game];
-			const schedule = {
-				...this.state.schedule,
-				games: games
-			}
-			const schedules = this.state.team.schedules.filter(sched => {
-				return sched.id !== this.state.schedule.id
-			})
-			const team = {
-				...this.state.team,
-				schedules: [...schedules, schedule]
-			}
-			console.log(game)
-			console.log(this.state)
-			this.props.editGame(team);
-			this.setState({
-				team: team,
-				schedule: schedule,
-				myTeam: team.teamName,
-				opponent: this.state.opponent,
-				time: this.state.time,
-				date: this.state.date,
-				id: this.state.id,
-			})
+			this.props.editGame(this.state);
 		} else {
 			document.getElementById('add-game-error').style.display = 'block';
 		}
@@ -92,17 +58,17 @@ class EditGame extends Component {
 	
 						<div className="input-field">
 							<input defaultValue={this.state.opponent} placeholder='Opponent' type='text' id={'opponent_' + this.state.id} onChange={this.handleChange} />
-							<label className='active' htmlFor='opponent'>Opponent:</label>
+							<label className='active' htmlFor={'opponent_' + this.state.id}>Opponent:</label>
 						</div>
 	
 						<div className="input-field">
 							<input defaultValue={this.state.time} placeholder='Time' type='time' id={'time_' + this.state.id} step='300' onChange={this.handleChange} />
-							<label className='active' htmlFor='time'>Time:</label>
+							<label className='active' htmlFor={'time_' + this.state.id}>Time:</label>
 						</div>
 	
 						<div className="input-field">
 							<input defaultValue={this.state.date} placeholder='date' type='date' id={'date_' + this.state.id} onChange={this.handleChange} />
-							<label className='active' htmlFor='date'>Date:</label>
+							<label className='active' htmlFor={'date_' + this.state.id}>Date:</label>
 						</div>
 	
 						<div className="input-field">

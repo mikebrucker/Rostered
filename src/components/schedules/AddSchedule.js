@@ -6,7 +6,6 @@ import generateUniqueId from 'generate-unique-id';
 
 class AddSchedule extends Component {
 	state = {
-		team: this.props.team,
 		teamId: this.props.team.teamId,
 		season: null,
 		current: false,
@@ -31,19 +30,11 @@ class AddSchedule extends Component {
 			const schedule = {
 				season: this.state.season,
 				current: this.state.current,
-				games: [],
-				id: uniqueKey
+				id: uniqueKey,
+				teamId: this.state.teamId
 			}
-			const schedules = schedule.current ? this.state.team.schedules.map(sched => {
-				return {...sched, current: false}
-			}) : this.state.team.schedules
-			const team = {
-				...this.state.team,
-				schedules: [...schedules, schedule]
-			}
-			this.props.addSchedule(team);
+			this.props.addSchedule(schedule);
 			this.setState({
-				team: team,
 				teamId: this.props.team.teamId,
 				season: null,
 				current: false,

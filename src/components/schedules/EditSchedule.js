@@ -5,8 +5,8 @@ import { Redirect } from 'react-router-dom';
 
 class EditSchedule extends Component {
 	state = {
-		team: this.props.team,
-		schedule: this.props.schedule,
+		teamId: this.props.team.teamId,
+		scheduleId: this.props.schedule.id,
 		season: this.props.schedule.season,
 		current: this.props.schedule.current,
 	}
@@ -23,32 +23,7 @@ class EditSchedule extends Component {
 		if (this.state.season && this.state.season.length > 0) {
 			document.getElementById('edit-schedule').style.display = 'none';
 			document.getElementById('edit-schedule-error').style.display = 'none';
-			const schedule = {
-				...this.state.schedule,
-				season: this.state.season,
-				current: this.state.current,
-			}
-			const schedules = this.state.current ? this.state.team.schedules.filter(sched => {
-				return sched.id !== schedule.id
-			}).map(sche => {
-				return {
-					...sche,
-					current: false
-				}
-			}) : this.state.team.schedules.filter(sched => {
-				return sched.id !== schedule.id
-			})
-			const team = {
-				...this.state.team,
-				schedules: [...schedules, schedule]
-			}
-			this.props.editSchedule(team);
-			this.setState({
-				team: team,
-				schedule: schedule,
-				season: schedule.season,
-				current: schedule.current,		
-			})
+			this.props.editSchedule(this.state);
 		} else {
 			document.getElementById('edit-schedule-error').style.display = 'block';
 		}
@@ -110,7 +85,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		editSchedule: (player) => dispatch(editSchedule(player))
+		editSchedule: (schedule) => dispatch(editSchedule(schedule))
 	}
 }
 

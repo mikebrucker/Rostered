@@ -49,7 +49,7 @@ const TeamDetails = (props) => {
 		return (
 			<section className="card section center team-details">
 				<Link to={'/team/' + team.teamId}>
-					<h2 className='white-text black'>{team.teamName}</h2>
+					<h1 className='white-text container black'>{team.teamName}</h1>
 				</Link>
 				<div className="container section">
 					<div className="card">
