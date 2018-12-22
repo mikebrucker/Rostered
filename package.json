@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "firebase": "^5.6.0",
-    "generate-unique-id": "^1.0.1",
     "materialize": "^1.0.0",
     "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.22.2",

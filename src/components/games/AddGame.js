@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addGame } from '../../store/actions/gameActions';
 import { Redirect } from 'react-router-dom';
-import generateUniqueId from 'generate-unique-id';
 
 class AddGame extends Component {
 	state = {
@@ -25,18 +24,11 @@ class AddGame extends Component {
 		this.state.opponent.length > 0 && this.state.time.length > 0 && this.state.date.length > 0) {
 			document.getElementById('add-game').style.display = 'none';
 			document.getElementById('add-game-error').style.display = 'none';
-			let uniqueKey = generateUniqueId.init({
-				length: 20,
-				includeSymbols: [
-					'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-				]
-			})
 			const game = {
 				myTeam: this.state.myTeam,
 				opponent: this.state.opponent,
 				time: this.state.time,
 				date: this.state.date,
-				id: uniqueKey,
 				teamId: this.state.teamId,
 				scheduleId: this.state.scheduleId,		
 			}
@@ -48,7 +40,7 @@ class AddGame extends Component {
 				opponent: null,
 				time: null,
 				date: null
-					})
+			})
 			document.getElementById('opponent').value = '';
 			document.getElementById('time').value = '';
 			document.getElementById('date').value = '';

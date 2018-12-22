@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addSchedule } from '../../store/actions/scheduleActions';
 import { Redirect } from 'react-router-dom';
-import generateUniqueId from 'generate-unique-id';
 
 class AddSchedule extends Component {
 	state = {
@@ -21,16 +20,9 @@ class AddSchedule extends Component {
 		if (this.state.season && this.state.season.length > 0) {
 			document.getElementById('add-schedule').style.display = 'none';
 			document.getElementById('add-schedule-error').style.display = 'none';
-			let uniqueKey = generateUniqueId.init({
-				length: 20,
-				includeSymbols: [
-					'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-				]
-			})
 			const schedule = {
 				season: this.state.season,
 				current: this.state.current,
-				id: uniqueKey,
 				teamId: this.state.teamId
 			}
 			this.props.addSchedule(schedule);

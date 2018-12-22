@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addPlayer } from '../../store/actions/playerActions';
 import { Redirect } from 'react-router-dom';
-import generateUniqueId from 'generate-unique-id';
 
 class AddPlayer extends Component {
 	state = {
@@ -24,19 +23,12 @@ class AddPlayer extends Component {
 		this.state.firstName.length > 0 && this.state.lastName.length > 0 && this.state.number.length > 0) {
 			document.getElementById('add-player').style.display = 'none';
 			document.getElementById('add-player-error').style.display = 'none';
-			let uniqueKey = generateUniqueId.init({
-				length: 20,
-				includeSymbols: [
-					'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-				]
-			})
 			const player = {
 				firstName: this.state.firstName,
 				lastName: this.state.lastName,
 				number: this.state.number,
 				position: this.state.position,
 				shoots: this.state.shoots,
-				id: uniqueKey,
 				teamId: this.state.teamId,
 			}
 			this.props.addPlayer(player);

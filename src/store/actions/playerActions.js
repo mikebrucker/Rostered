@@ -1,3 +1,5 @@
+import { createId } from './createId';
+
 export const addPlayer = (props) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
 		const firestore = getFirestore();
@@ -7,7 +9,7 @@ export const addPlayer = (props) => {
 			number: props.number,
 			position: props.position,
 			shoots: props.shoots,
-			id: props.id,
+			id: createId()
 		}
 		firestore.collection('teams').doc(props.teamId).get()
 		.then(snapshot => {
@@ -21,7 +23,7 @@ export const addPlayer = (props) => {
 			})
 		})
 	}
-};
+}
 
 export const editPlayer = (props) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -48,7 +50,8 @@ export const editPlayer = (props) => {
 				dispatch({ type: 'EDIT_PLAYER_ERROR', err })
 			})
 		})
-	}}
+	}
+}
 
 export const deletePlayer = (teamId, playerId) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {

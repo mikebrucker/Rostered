@@ -7,7 +7,7 @@ export const addTeam = (team) => {
 			dispatch({ type: 'ADD_TEAM_ERROR', err })
 		})
 	}
-};
+}
 
 export const editTeam = (team) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
