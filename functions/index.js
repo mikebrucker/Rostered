@@ -16,7 +16,13 @@ exports.teamCreated = functions.firestore
 		.doc(doc.id).get().then(snapshot => {
 			const teamdata = snapshot.data();
 			const team = {
-				...teamdata,
+				arena: teamdata.arena,
+				league: teamdata.league,
+				players: teamdata.players,
+				schedules: teamdata.schedules,
+				sport: teamdata.sport,
+				teamName: teamdata.teamName,
+				teamOwnerId: teamdata.teamOwnerId,
 				teamId: snapshot.id
 			}
 			return updateTeam(team);

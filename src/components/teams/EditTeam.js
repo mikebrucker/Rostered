@@ -39,7 +39,7 @@ class EditTeam extends Component {
 	render() {
 		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to='/signin' />
-		if (this.state.arena) {
+		if (this.state) {
 			return (
 				<div className='container edit-team'>
 					<div style={{display:'none'}} id="edit-team-error" className="red-text">Input Fields Cannot Be Empty</div>
